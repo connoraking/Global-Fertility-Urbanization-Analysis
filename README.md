@@ -38,5 +38,10 @@ An R-based project that analyzes the connection between urbanization and fertili
 - We then used the `countrycode` so we could analyze the data pertaining to continents and subregions.
 - The R code can be found [here](./cleaning_combining.R)  
 
+## Visulizations
+
+### Urban Rate
+
+![](u_rate_box.png)<!-- -->
 
 
