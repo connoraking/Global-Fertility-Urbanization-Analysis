@@ -11,6 +11,7 @@ Connor King
 - [Fertility Data](#fertility-data)
 - [Fertility vs Urban Percent](#fertility-vs-urban-percent)
 - [Fertility vs Urban Growth Rate](#fertility-vs-urban-growth-rate)
+  - [Linear Regression Plot](#linear-regression-plot)
 
 ``` r
 library(tidyverse)
@@ -124,11 +125,29 @@ corrplot(corr_matrix,
          order = "hclust",
          diag = TRUE,
          addCoef.col = TRUE,
-         number.cex = 0.55,
+         number.cex = 1,
          tl.srt = 60)
 ```
 
 ![](eda_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+png(file="corrplot2.png", width=800, height=800)
+
+corrplot(corr_matrix, 
+         method = "color",  
+         type = "upper", 
+         order = "hclust",
+         diag = TRUE,
+         addCoef.col = TRUE,
+         number.cex = 1,
+         tl.srt = 60)
+
+dev.off()
+```
+
+    ## png 
+    ##   2
 
 Fertility rate has a high correlation urban growth and rural growth. It
 also has a negative correlation with urban population percentage life
@@ -174,7 +193,7 @@ ug05
 
     ## Warning: `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ``` r
 na_countries <- df[is.na(df$continent), ]
@@ -230,7 +249,7 @@ ggplot(data = df_05, aes(x = continent, y =urban_pop_percent, fill = continent))
 
     ## Warning: `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-8-1.png)<!-- --> Americas and
+![](eda_files/figure-gfm/unnamed-chunk-9-1.png)<!-- --> Americas and
 Europe have higher urban population percentages. The distributions
 appear to be approx normal.
 
@@ -270,7 +289,7 @@ ug10
 
     ## Warning: `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ``` r
 df_10 %>% 
@@ -296,7 +315,7 @@ ggplot(data = df_10, aes(x = continent, y =urban_pop_percent, fill = continent))
 
     ## Warning: `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 ### 2015
 
@@ -334,7 +353,7 @@ ug15
 
     ## Warning: `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 ``` r
 ggplot(data = df_15, aes(x = continent, y =urban_pop_percent, fill = continent)) +
@@ -345,28 +364,74 @@ ggplot(data = df_15, aes(x = continent, y =urban_pop_percent, fill = continent))
 
     ## Warning: `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
 ### Yearly Comparison
 
 ``` r
-df %>% 
+df_na <- subset(df, !is.na(continent))
+
+df_na %>% 
   filter(year != 2001 & year != 2018 & urban_growth < 20) %>% 
     ggplot(aes(x = continent, y = urban_growth, fill = continent)) +
       geom_violin(width = 1.4) +
       geom_boxplot(width = 0.1, color = "grey") +
       facet_wrap(~year, nrow = 1) +
-      theme_bw()
+      ylab("Urban Growth Rate (percent)") +
+      xlab("Continent") +
+      facet_wrap(~year, nrow = 1) +
+      theme_dark() +
+      theme(axis.text.x = element_blank())
 ```
 
     ## Warning: `position_dodge()` requires non-overlapping x intervals
     ## `position_dodge()` requires non-overlapping x intervals
     ## `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+``` r
+ggsave("u_rate_box.png")
+```
+
+    ## Saving 7 x 5 in image
+
+    ## Warning: `position_dodge()` requires non-overlapping x intervals
+    ## `position_dodge()` requires non-overlapping x intervals
+    ## `position_dodge()` requires non-overlapping x intervals
 
 The violin plot get thinner each year indicating decreasing variability.
 These can be shown in the analytical summaries.
+
+``` r
+df_na %>% 
+  filter(year != 2001 & year != 2018 & urban_growth < 20) %>% 
+    ggplot(aes(x = continent, y = urban_pop_percent, fill = continent)) +
+      geom_violin(width = 1.4) +
+      geom_boxplot(width = 0.1, color = "grey") +
+      facet_wrap(~year, nrow = 1) +
+      ylab("Urban Population (percent)") +
+      xlab("Continent") +
+      facet_wrap(~year, nrow = 1) +
+      theme_dark() +
+      theme(axis.text.x = element_blank())
+```
+
+    ## Warning: `position_dodge()` requires non-overlapping x intervals
+    ## `position_dodge()` requires non-overlapping x intervals
+    ## `position_dodge()` requires non-overlapping x intervals
+
+![](eda_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+``` r
+ggsave("u_percent_box.png")
+```
+
+    ## Saving 7 x 5 in image
+
+    ## Warning: `position_dodge()` requires non-overlapping x intervals
+    ## `position_dodge()` requires non-overlapping x intervals
+    ## `position_dodge()` requires non-overlapping x intervals
 
 ## Fertility Data
 
@@ -376,8 +441,11 @@ df %>%
     ggplot(aes(x = continent, y = fertility_rate, fill = continent)) +
       geom_violin(width = 1.4) +
       geom_boxplot(width = 0.1, color = "grey") +
+      ylab("Fertility Rate") +
+      xlab("Continent") +
       facet_wrap(~year, nrow = 1) +
-      theme_bw()
+      theme_dark() +
+      theme(axis.text.x = element_blank())
 ```
 
     ## Warning: Removed 61 rows containing non-finite values (`stat_ydensity()`).
@@ -388,7 +456,21 @@ df %>%
     ## `position_dodge()` requires non-overlapping x intervals
     ## `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+
+``` r
+ggsave("f_box.png")
+```
+
+    ## Saving 7 x 5 in image
+
+    ## Warning: Removed 61 rows containing non-finite values (`stat_ydensity()`).
+
+    ## Warning: Removed 61 rows containing non-finite values (`stat_boxplot()`).
+
+    ## Warning: `position_dodge()` requires non-overlapping x intervals
+    ## `position_dodge()` requires non-overlapping x intervals
+    ## `position_dodge()` requires non-overlapping x intervals
 
 Africa has a much higher fertility rate than the other continents.
 
@@ -410,25 +492,41 @@ df %>%
     ## `position_dodge()` requires non-overlapping x intervals
     ## `position_dodge()` requires non-overlapping x intervals
 
-![](eda_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 ## Fertility vs Urban Percent
 
 ``` r
+library(ggthemes)
+
 df_na <- subset(df, !is.na(continent))
 
 df_na %>% 
   ggplot(aes(x = urban_pop_percent, y = fertility_rate, color = continent)) +
   geom_point(aes(size = capital_pop1)) +
   theme(legend.title = element_blank()) +
+#  scale_shape_manual(values = c("0" = 21, "1" = 20)) +
   ylim(0, 10) +
   xlim(0, 100) +
-  theme_bw()
+  xlab("Urban population (percent)") +
+  ylab("Fertility rate") +
+  guides(shape = "none") +
+  guides(size = "none") +
+  labs(color = "Continent") +
+  theme_economist_white()
 ```
 
     ## Warning: Removed 282 rows containing missing values (`geom_point()`).
 
-![](eda_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+``` r
+ggsave("fu_percent.png")    
+```
+
+    ## Saving 7 x 5 in image
+
+    ## Warning: Removed 282 rows containing missing values (`geom_point()`).
 
 - Size
   - capital population(thousands)
@@ -449,15 +547,25 @@ df_na %>%
     ylim(0,10) +
     xlim(-2, 15) +
     scale_shape_manual(values = c("0" = 21, "1" = 20, "missing" = 2)) +
-    xlab("urban population(percent growth rate)") +
-    ylab("fertility rate") +
-    guides(shape = guide_legend(title = "")) +
-    guides(size = guide_legend(title = "")) 
+    xlab("Urban Growth Rate (percent)") +
+    ylab("Fertility rate") +
+    guides(shape = "none") +
+    guides(size = "none") +
+    labs(color = "Continent") +
+    theme_economist_white()
 ```
 
     ## Warning: Removed 468 rows containing missing values (`geom_point()`).
 
-![](eda_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](eda_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+
+``` r
+ggsave("fu_rate.png")
+```
+
+    ## Saving 7 x 5 in image
+
+    ## Warning: Removed 468 rows containing missing values (`geom_point()`).
 
 - Shape
   - filled: positive rural growth
@@ -470,3 +578,39 @@ df_na %>%
     smallest
   - urban growth in Europe is very slow, mostly between -2% to 2%
 - There are some countries with negative urban growth rates
+
+### Linear Regression Plot
+
+``` r
+df_o <- df_na[df_na$country != "Qatar" & df_na$country != "United Arab Emirates", ]
+
+df_o %>%   
+  ggplot(aes(urban_growth, fertility_rate)) +
+    geom_point(aes(size = abs(rural_growth), color = continent, shape = sign)) +
+    geom_smooth(method = "lm", se = TRUE, na.rm = TRUE) +
+    theme(legend.title = element_blank()) +
+    ylim(0,10) +
+    xlim(-2, 10) +
+    scale_shape_manual(values = c("0" = 21, "1" = 20, "missing" = 2)) +
+    xlab("Urban Growth Rate (percent)") +
+    ylab("Fertility rate") +
+    guides(shape = "none") +
+    guides(size = "none") +
+    labs(color = "Continent") +
+    theme_economist_white()
+```
+
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+    ## Warning: Removed 464 rows containing missing values (`geom_point()`).
+
+![](eda_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+
+``` r
+ggsave("fu_growth_line.png")
+```
+
+    ## Saving 7 x 5 in image
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+    ## Warning: Removed 464 rows containing missing values (`geom_point()`).

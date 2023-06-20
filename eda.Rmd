@@ -57,8 +57,25 @@ corrplot(corr_matrix,
          order = "hclust",
          diag = TRUE,
          addCoef.col = TRUE,
-         number.cex = 0.55,
+         number.cex = 1,
          tl.srt = 60)
+```
+
+
+```{r}
+png(file="corrplot2.png", width=800, height=800)
+
+corrplot(corr_matrix, 
+         method = "color",  
+         type = "upper", 
+         order = "hclust",
+         diag = TRUE,
+         addCoef.col = TRUE,
+         number.cex = 1,
+         tl.srt = 60)
+
+dev.off()
+
 ```
 
 Fertility rate has a high correlation urban growth and rural growth. It also has a negative correlation with urban population percentage life expectancy. 
@@ -188,16 +205,41 @@ ggplot(data = df_15, aes(x = continent, y =urban_pop_percent, fill = continent))
 ### Yearly Comparison
 
 ```{r}
-df %>% 
+df_na <- subset(df, !is.na(continent))
+
+df_na %>% 
   filter(year != 2001 & year != 2018 & urban_growth < 20) %>% 
     ggplot(aes(x = continent, y = urban_growth, fill = continent)) +
       geom_violin(width = 1.4) +
       geom_boxplot(width = 0.1, color = "grey") +
       facet_wrap(~year, nrow = 1) +
-      theme_bw()
+      ylab("Urban Growth Rate (percent)") +
+      xlab("Continent") +
+      facet_wrap(~year, nrow = 1) +
+      theme_dark() +
+      theme(axis.text.x = element_blank())
+
+ggsave("u_rate_box.png")
 ```
 
 The violin plot get thinner each year indicating decreasing variability. These can be shown in the analytical summaries. 
+
+```{r}
+df_na %>% 
+  filter(year != 2001 & year != 2018 & urban_growth < 20) %>% 
+    ggplot(aes(x = continent, y = urban_pop_percent, fill = continent)) +
+      geom_violin(width = 1.4) +
+      geom_boxplot(width = 0.1, color = "grey") +
+      facet_wrap(~year, nrow = 1) +
+      ylab("Urban Population (percent)") +
+      xlab("Continent") +
+      facet_wrap(~year, nrow = 1) +
+      theme_dark() +
+      theme(axis.text.x = element_blank())
+
+ggsave("u_percent_box.png")
+```
+
 
 ## Fertility Data
 
@@ -207,8 +249,13 @@ df %>%
     ggplot(aes(x = continent, y = fertility_rate, fill = continent)) +
       geom_violin(width = 1.4) +
       geom_boxplot(width = 0.1, color = "grey") +
+      ylab("Fertility Rate") +
+      xlab("Continent") +
       facet_wrap(~year, nrow = 1) +
-      theme_bw()
+      theme_dark() +
+      theme(axis.text.x = element_blank())
+
+ggsave("f_box.png")
 ```
 
 Africa has a much higher fertility rate than the other continents. 
@@ -226,17 +273,25 @@ df %>%
 ## Fertility vs Urban Percent
 
 ```{r}
+library(ggthemes)
+
 df_na <- subset(df, !is.na(continent))
 
 df_na %>% 
   ggplot(aes(x = urban_pop_percent, y = fertility_rate, color = continent)) +
   geom_point(aes(size = capital_pop1)) +
   theme(legend.title = element_blank()) +
+#  scale_shape_manual(values = c("0" = 21, "1" = 20)) +
   ylim(0, 10) +
   xlim(0, 100) +
-  theme_bw()
+  xlab("Urban population (percent)") +
+  ylab("Fertility rate") +
+  guides(shape = "none") +
+  guides(size = "none") +
+  labs(color = "Continent") +
+  theme_economist_white()
        
-       
+ggsave("fu_percent.png")    
 ```
 
 - Size
@@ -246,9 +301,6 @@ df_na %>%
   - countries with high percent of urban population tend to have low fertility rate
   - Africa has the highest average fertility rate while Europe has the lowest
   - fertility rate and urban population percent are negatively related
-
-### Animated
-
 
   
 ## Fertility vs Urban Growth Rate
@@ -262,11 +314,14 @@ df_na %>%
     ylim(0,10) +
     xlim(-2, 15) +
     scale_shape_manual(values = c("0" = 21, "1" = 20, "missing" = 2)) +
-    xlab("urban population(percent growth rate)") +
-    ylab("fertility rate") +
-    guides(shape = guide_legend(title = "")) +
-    guides(size = guide_legend(title = "")) 
+    xlab("Urban Growth Rate (percent)") +
+    ylab("Fertility rate") +
+    guides(shape = "none") +
+    guides(size = "none") +
+    labs(color = "Continent") +
+    theme_economist_white()
 
+ggsave("fu_rate.png")
 ```
 
 - Shape
@@ -281,3 +336,28 @@ df_na %>%
   - urban growth in Europe is very slow, mostly between -2% to 2%
 
 - There are some countries with negative urban growth rates
+
+### Linear Regression Plot
+
+```{r}
+df_o <- df_na[df_na$country != "Qatar" & df_na$country != "United Arab Emirates", ]
+
+df_o %>%   
+  ggplot(aes(urban_growth, fertility_rate)) +
+    geom_point(aes(size = abs(rural_growth), color = continent, shape = sign)) +
+    geom_smooth(method = "lm", se = TRUE, na.rm = TRUE) +
+    theme(legend.title = element_blank()) +
+    ylim(0,10) +
+    xlim(-2, 10) +
+    scale_shape_manual(values = c("0" = 21, "1" = 20, "missing" = 2)) +
+    xlab("Urban Growth Rate (percent)") +
+    ylab("Fertility rate") +
+    guides(shape = "none") +
+    guides(size = "none") +
+    labs(color = "Continent") +
+    theme_economist_white()
+
+ggsave("fu_growth_line.png")
+
+```
+
