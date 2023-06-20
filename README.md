@@ -5,7 +5,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 
 1. [Project Goal](#project-goal)
 2. [Data](#data)
-  - [Cleaning and Combining](#cleaning-and-combining)
+    - [Cleaning and Combining](#cleaning-and-combining)
 
 ## Project Goal
 
