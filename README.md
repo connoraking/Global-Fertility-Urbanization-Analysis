@@ -5,7 +5,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 
 1. [Project Goal](#project-goal)
 2. [Data](#data)
-  - [Cleaning and Combining](#cleaning/combining)
+  - [Cleaning and Combining](#cleaning-and-combining)
 
 ## Project Goal
 
@@ -38,7 +38,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 - Urban population percentage is a proxy for the degree of urbanization, reflecting the proportion of the population living in urban areas. 
 - Urban growth percentage and rural growth percentage are proxies for the rate at which urban and rural populations are changing, respectively, indicating the dynamics of urbanization over time.
 
-#### Cleaning/Combining
+#### Cleaning and Combining
 
 - The variables of interest were under a “series” column so I used pivot_wider from `tidyr` to create separate columns and ensure the data was tidy. 
 - Within each data set I dropped irrelevant data, and renamed the columns.
