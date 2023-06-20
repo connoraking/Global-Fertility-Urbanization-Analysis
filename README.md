@@ -9,6 +9,8 @@ An R-based project that analyzes the connection between urbanization and fertili
 3. [Visualizations](#visualizations)
     - [Urban Growth Rate Violin Plot](#urban-growth-rate-violin-plot)
     - [Urban Percent Violin Plot](#urban-percent-violin-plot)
+    - [Fertility Rate Violin Plot](#fertility-rate-violin-plot)
+    - [Fertility vs Urban Growth](#fertility-vs-urban-growth)
 
 ## Project Goal
 
