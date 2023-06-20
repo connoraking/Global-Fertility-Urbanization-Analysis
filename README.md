@@ -74,7 +74,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 - There are some countries with negative urban growth rates.
 - The two green outliers are Qatar and the United Arab Emirates
 
-
+![](fu_growth_line.png)<!-- -->
 
 ### Fertility vs Urban Percentage 
 
