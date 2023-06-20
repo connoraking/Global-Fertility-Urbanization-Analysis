@@ -1,6 +1,19 @@
 # Global-Fertility-Urbanization-Analysis
 An R-based project that analyzes the connection between urbanization and fertility rates using UN provided data.
 
+## Table of Contents
+
+1. [Project Goal](#project-goal)
+2. [Data](#data)
+    - [Cleaning and Combining](#cleaning-and-combining)
+3. [Visualizations](#visualizations)
+    - [Urban Growth Rate Violin Plot](#urban-growth-rate-violin-plot)
+    - [Urban Percent Violin Plot](#urban-percent-violin-plot)
+    - [Fertility Rate Violin Plot](#fertility-rate-violin-plot)
+    - [Fertility vs Urban Growth](#fertility-vs-urban-growth)
+    - [Fertility vs Urban Percentage](#fertility-vs-urban-percentage)
+4. [Conclusion](#conclusion)
+
 ## Project Goal
 
 #### Resource allocation and planning
@@ -25,15 +38,14 @@ An R-based project that analyzes the connection between urbanization and fertili
 - Urban percentage growth measures the percentage growth of the urban areas per year  tracked over a 5-year period preceding the reference year.
 - Rural percentage growth measures the percentage growth of rural areas per year  tracked over a 5-year period preceding the reference year.
 
-
-![](corrplot.png)<!-- -->
+![](corrplot2.png)<!-- -->
 
 #### Proxies
 
 - Urban population percentage is a proxy for the degree of urbanization, reflecting the proportion of the population living in urban areas. 
 - Urban growth percentage and rural growth percentage are proxies for the rate at which urban and rural populations are changing, respectively, indicating the dynamics of urbanization over time.
 
-#### Cleaning/Combining
+#### Cleaning and Combining
 
 - The variables of interest were under a “series” column so I used pivot_wider from `tidyr` to create separate columns and ensure the data was tidy. 
 - Within each data set I dropped irrelevant data, and renamed the columns.
@@ -41,7 +53,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 - We then used the `countrycode` so we could analyze the data pertaining to continents and subregions.
 - The R code can be found [here](./cleaning_combining.R)  
 
-## Visulizations
+## Visualizations
 
 ### Urban Growth Rate Violin Plot
 
@@ -85,4 +97,42 @@ An R-based project that analyzes the connection between urbanization and fertili
 
 ![](fu_percent.png)<!-- -->
 
-![](corrplot.png)<!-- -->
+- Size
+  - capital population(thousands)
+- Ellipse shape
+  - countries with high percent of urban population tend to have low fertility rate
+  - Africa has the highest average fertility rate while Europe has the lowest
+  - fertility rate and urban population percent are negatively related
+- High urban population > 75%
+  - Northern American, Western Europe, Australia and New Zealand
+  - Variances in fertility rate and urban population percent are the smallest in Europe
+- High fertility rate
+  - Sub-Sarahan Africa women has more than 4 children in average
+
+## Conclusion
+
+### Results
+
+- Urban percentage and urban growth rate
+  - Negatively correlated
+  - Developing countries are more energetic
+
+- Negative urban growth rate
+  - Positive rural growth rate: rural gentrification
+    - Affluent individuals and families from urban areas to rural areas
+  - Negative rural growth rate: emigration or brain drain
+    - Emigration of highly skilled or educated individuals, often happens in islands
+
+### Analysis
+
+#### Urban percentage and urban growth rate: Negatively correlated
+
+If developing countries are experiencing rapid urban growth, this might indicate that they are undergoing demographic transition. Demographic transition is often associated with falling fertility rates as more people move to cities, adopt urban lifestyles, and have fewer children due to factors such as cost of living, access to education, and availability of family planning resources. This trend can affect the demand for various services and resources in both urban and rural areas.
+
+#### Negative urban growth rate and Positive rural growth rate: rural gentrification
+
+Affluent individuals and families moving from urban to rural areas can change the demographic and economic landscape of those rural areas. This could potentially impact fertility rates in these regions due to changes in lifestyle, economic stability, and access to healthcare and education.
+
+#### Negative urban growth rate and Negative rural growth rate: emigration or brain drain
+
+If highly skilled or educated individuals are leaving certain areas, this could be a sign of economic or social challenges. This can have a direct impact on fertility rates, as areas with significant emigration might see a decrease in fertility rates due to reduced population in the childbearing age group. This also has implications for resource allocation, as it indicates areas that might be struggling to retain their population due to lack of opportunities or services.
