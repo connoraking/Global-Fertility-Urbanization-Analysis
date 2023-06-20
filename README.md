@@ -1,6 +1,12 @@
 # Global-Fertility-Urbanization-Analysis
 An R-based project that analyzes the connection between urbanization and fertility rates using UN provided data.
 
+## Table of Contents
+
+1. [Project Goal](#project-goal)
+2. [Data](#data)
+  - [Cleaning and Combining](#cleaning/combining)
+
 ## Project Goal
 
 #### Resource allocation and planning
