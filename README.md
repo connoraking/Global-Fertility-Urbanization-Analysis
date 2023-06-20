@@ -30,4 +30,13 @@ An R-based project that analyzes the connection between urbanization and fertili
 - Urban population percentage is a proxy for the degree of urbanization, reflecting the proportion of the population living in urban areas. 
 - Urban growth percentage and rural growth percentage are proxies for the rate at which urban and rural populations are changing, respectively, indicating the dynamics of urbanization over time.
 
+#### Cleaning/Combining
+
+- The variables of interest were under a “series” column so I used pivot_wider from `tidyr` to create separate columns and ensure the data was tidy. 
+- Within each data set I dropped irrelevant data, and renamed the columns.
+- Our fertility dataset had the reference year of 2022. Since the urban data set did not have this year, I used left_join when combining the datasets which drops the year within our finished dataset.
+- We then used the `countrycode` so we could analyze the data pertaining to continents and subregions.
+- The R code can be found [here](./cleaning_combining.R)  
+
+
 
