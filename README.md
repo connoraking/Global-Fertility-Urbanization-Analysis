@@ -16,7 +16,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 ## Data
 
 - I obtained the data from the United Nations at data.un.org
-- I used two separate datasets, one labeled “Population in the capital city, urban, and rural areas” and “Population growth, fertility, life expectancy, and mortality”
+- I used two separate datasets, one labeled “Population in the capital city, urban, and rural areas” and “Population growth, fertility, life expectancy, and mortality”.
 
 #### Variables 
 
@@ -24,6 +24,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 - Urban percentage measures the percentage of the country living in urban areas (cities)
 - Urban percentage growth measures the percentage growth of the urban areas per year  tracked over a 5-year period preceding the reference year.
 - Rural percentage growth measures the percentage growth of rural areas per year  tracked over a 5-year period preceding the reference year.
+
 
 ![](corrplot.png)<!-- -->
 
@@ -84,4 +85,4 @@ An R-based project that analyzes the connection between urbanization and fertili
 
 ![](fu_percent.png)<!-- -->
 
-
+![](corrplot.png)<!-- -->
