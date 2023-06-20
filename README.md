@@ -16,7 +16,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 ## Data
 
 - I obtained the data from the United Nations at data.un.org
-- I used two separate datasets, one labeled “Population in the capital city, urban, and rural areas” and “Population growth, fertility, life expectancy, and mortality”
+- I used two separate datasets, one labeled “Population in the capital city, urban, and rural areas” and “Population growth, fertility, life expectancy, and mortality”.
 
 #### Variables 
 
