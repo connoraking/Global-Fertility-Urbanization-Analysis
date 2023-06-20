@@ -68,7 +68,7 @@ An R-based project that analyzes the connection between urbanization and fertili
   - Unfilled: negative rural growth
 - Size
   - absolute value of rural growth
-- Fertility rate and urban growth are positively almost linearly correlated
+- Fertility rate and urban growth are positively linearly correlated
   - Africa has the largest urban growth rate while Europe has the smallest
   - Urban growth in Europe is very slow, mostly between -2% to 2%
 - There are some countries with negative urban growth rates.
