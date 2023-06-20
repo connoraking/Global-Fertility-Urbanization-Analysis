@@ -44,5 +44,8 @@ An R-based project that analyzes the connection between urbanization and fertili
 
 ![](u_rate_box.png)<!-- -->
 
+### Urban Percent
+
+![](u_percent_box.png)<!-- -->
 
 
