@@ -7,6 +7,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 2. [Data](#data)
     - [Cleaning and Combining](#cleaning-and-combining)
 3. [Visualizations](#visualizations)
+    - [Urban Growth Rate Violin Plot](#urban-growth-rate-violin-plot)
 
 ## Project Goal
 
@@ -47,7 +48,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 - We then used the `countrycode` so we could analyze the data pertaining to continents and subregions.
 - The R code can be found [here](./cleaning_combining.R)  
 
-## Visulizations
+## Visualizations
 
 ### Urban Growth Rate Violin Plot
 
