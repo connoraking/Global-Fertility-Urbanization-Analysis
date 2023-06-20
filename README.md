@@ -25,6 +25,8 @@ An R-based project that analyzes the connection between urbanization and fertili
 - Urban percentage growth measures the percentage growth of the urban areas per year  tracked over a 5-year period preceding the reference year.
 - Rural percentage growth measures the percentage growth of rural areas per year  tracked over a 5-year period preceding the reference year.
 
+![](corrplot.png)<!-- -->
+
 #### Proxies
 
 - Urban population percentage is a proxy for the degree of urbanization, reflecting the proportion of the population living in urban areas. 
@@ -75,6 +77,8 @@ An R-based project that analyzes the connection between urbanization and fertili
 - The two green outliers are Qatar and the United Arab Emirates
 
 ![](fu_growth_line.png)<!-- -->
+
+- Here is the plot exlcuding Qatar and the UAE fitted with a linear model
 
 ### Fertility vs Urban Percentage 
 
