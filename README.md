@@ -40,15 +40,27 @@ An R-based project that analyzes the connection between urbanization and fertili
 
 ## Visulizations
 
-### Urban Rate
+### Urban Growth Rate Violin Plot
 
 ![](u_rate_box.png)<!-- -->
 
-### Urban Percent
+- Africa has the highest urban growth rate.
+- The distributions get thinner each year indicating decreasing variability.
+
+### Urban Percent Violin Plot
 
 ![](u_percent_box.png)<!-- -->
 
-### Fertility Rate
+- The Americas and Europe have the highest urban population percentage while Africa has the lowest.
+
+### Fertility Rate Violin Plot
 
 ![](f_box.png)<!-- -->
+
+- Africa has by far the highest fertility rate, followed by Oceania.
+
+### Fertility vs Urban Growth 
+
+![](fu_rate.png)<!-- -->
+
 
