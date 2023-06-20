@@ -1,6 +1,4 @@
-#
-# Shiny App implementation for STAT 697V Homework 5 Presentation, Group 5
-#
+
 # Show interactive plots of
 #   Fertility vs Life Expectancy Ratio by country
 #   Fertility vs Urban Percentage by country
@@ -17,27 +15,8 @@ library(shiny)
 library(tidyverse)
 library(plotly)
 
-# Import test data
-df = read.csv("test.csv")
-
-df$capital_pop = as.numeric(df$cap_city_pop)
-df$urban_pop_percent = as.numeric(df$urban_pop_percent)
-df$urban_growth = as.numeric(df$urban_growth)
-df$rural_growth = as.numeric(df$rural_growth)
-df$cap_percent_pop = as.numeric(df$cap_percent_pop)
-df$fertility_rate = as.numeric(df$fertility_rate)
-
-# if capital_pop is NA, label as 0; else 1
-df$capital_pop_sign = ifelse(is.na(df$capital_pop), "0", "1")
-
-# if capital_pop is NA, give the value of 1
-df$capital_pop1 = ifelse(is.na(df$capital_pop), 1, df$capital_pop)
-
-# if rural_growth<0, label as 0; else 1
-df$sign = ifelse(df$rural_growth < 0, "0", "1")
-
-# mark the missing value of rural_growth as missing
-df$sign = ifelse(is.na(df$sign), "missing", df$sign)
+# Import combined data set
+df = read.csv("combined_data.csv")
 
 # Find continents and associated sub-regions from data frame
 continents = levels(factor(df$continent))
@@ -125,7 +104,6 @@ ui = fluidPage(
   # Application title
   titlePanel(
     "Fertility Rate of Countries Based on Urban Concentration",
-    windowTitle = "STAT697V HW5"
   ),
 
   # Sidebar with checkbox and slider inputs based on data 
