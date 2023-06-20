@@ -84,3 +84,15 @@ An R-based project that analyzes the connection between urbanization and fertili
 
 ![](fu_percent.png)<!-- -->
 
+- Size
+  - capital population(thousands)
+- Ellipse shape
+  - countries with high percent of urban population tend to have low fertility rate
+  - Africa has the highest average fertility rate while Europe has the lowest
+  - fertility rate and urban population percent are negatively related
+- High urban population > 75%
+  - Northern American, Western Europe, Australia and New Zealand
+  - Variances in fertility rate and urban population percent are the smallest in Europe
+- High fertility rate
+  - Sub-Sarahan Africa women has more than 4 children in average
+
