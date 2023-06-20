@@ -25,6 +25,7 @@ An R-based project that analyzes the connection between urbanization and fertili
 - Urban percentage growth measures the percentage growth of the urban areas per year  tracked over a 5-year period preceding the reference year.
 - Rural percentage growth measures the percentage growth of rural areas per year  tracked over a 5-year period preceding the reference year.
 
+
 ![](corrplot.png)<!-- -->
 
 #### Proxies
